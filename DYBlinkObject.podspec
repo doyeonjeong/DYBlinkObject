@@ -19,11 +19,11 @@ Pod::Spec.new do |s|
 
   s.description      = 'Create beautiful animated shapes with DYBlinkObject! Supports multiple shapes (circle, star, heart, polygon, etc.) and rich animations (color transitions, rotation, scale, glow effects, and more). Easy to use with chainable API and fully customizable parameters.'
 
-  s.homepage         = 'https://github.com/BluePepper-iOS/DYBlinkObject'
+  s.homepage         = 'https://github.com/doyeonjeong/DYBlinkObject'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.cogitm/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'doyeonjeong' => 'debby_@kakao.com' }
-  s.source           = { :git => 'https://github.com/BluePepper-iOS/DYBlinkObject.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/doyeonjeong/DYBlinkObject.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '13.0'
