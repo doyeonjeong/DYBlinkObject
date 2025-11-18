@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DYBlinkObject'
-  s.version          = '1.0.0'
-  s.summary          = 'Swift library that creates animated objects that seem to flickering.'
+  s.version          = '2.0.0'
+  s.summary          = 'A powerful Swift library for creating animated shapes with various visual effects.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = 'You can easily create a blinking object with only two methods.'
+  s.description      = 'Create beautiful animated shapes with DYBlinkObject! Supports multiple shapes (circle, star, heart, polygon, etc.) and rich animations (color transitions, rotation, scale, glow effects, and more). Easy to use with chainable API and fully customizable parameters.'
 
   s.homepage         = 'https://github.com/BluePepper-iOS/DYBlinkObject'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.cogitm/screenshots_2'
