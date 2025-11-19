@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'DYBlinkObject'
-  s.version          = '1.0.0'
-  s.summary          = 'Swift library that creates animated objects that seem to flickering.'
+  s.version          = '2.0.0'
+  s.summary          = 'Swift library for creating animated shapes with various effects and chainable API.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -17,13 +17,13 @@ Pod::Spec.new do |s|
 #   * Write the description between the DESC delimiters below.
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
-  s.description      = 'You can easily create a blinking object with only two methods.'
+  s.description      = 'DYBlinkObject v2.0 supports 8 shape types (Circle, Triangle, Star, Heart, Polygon, RoundedPolygon, Rectangle, CustomPath) and 6 animation types (Alpha, Scale, Rotation, Glow, ColorTransition, Position) with a powerful chainable API. Fully backward compatible with v1.0.'
 
-  s.homepage         = 'https://github.com/BluePepper-iOS/DYBlinkObject'
+  s.homepage         = 'https://github.com/doyeonjeong/DYBlinkObject'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.cogitm/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'doyeonjeong' => 'debby_@kakao.com' }
-  s.source           = { :git => 'https://github.com/BluePepper-iOS/DYBlinkObject.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/doyeonjeong/DYBlinkObject.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '13.0'
