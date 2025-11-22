@@ -1,6 +1,6 @@
 use_frameworks!
 
-platform :ios, '13.0'
+platform :ios, '18.0'
 
 target 'DYBlinkObject_Example' do
   pod 'DYBlinkObject', :path => '../'
@@ -8,6 +8,6 @@ target 'DYBlinkObject_Example' do
   target 'DYBlinkObject_Tests' do
     inherit! :search_paths
 
-    
+
   end
 end
