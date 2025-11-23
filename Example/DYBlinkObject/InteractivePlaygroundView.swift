@@ -99,15 +99,15 @@ struct InteractivePlaygroundView: View {
         // Add animation
         switch selectedAnimationIndex {
         case 0: // Alpha
-            shapeView.addAnimation(.alpha(from: 1.0, to: 0.3, duration: 1.0))
+            shapeView.addAnimation(AnimationType.alpha(from: 1.0, to: 0.3, duration: 1.0))
         case 1: // Scale
-            shapeView.addAnimation(.scale(from: 1.0, to: 1.3, duration: 1.0))
+            shapeView.addAnimation(AnimationType.scale(from: 1.0, to: 1.3, duration: 1.0))
         case 2: // Rotation
-            shapeView.addAnimation(.rotation(angle: .pi * 2, duration: 2.0))
+            shapeView.addAnimation(AnimationType.rotation(angle: .pi * 2, duration: 2.0))
         case 3: // Glow
-            shapeView.addAnimation(.glow(color: color, radius: 20, duration: 1.5))
+            shapeView.addAnimation(AnimationType.glow(color: color, radius: 20, duration: 1.5))
         case 4: // Color
-            shapeView.addAnimation(.colorTransition(from: color, to: getAlternateColor(for: color), duration: 2.0))
+            shapeView.addAnimation(AnimationType.colorTransition(from: color, to: getAlternateColor(for: color), duration: 2.0))
         default:
             break
         }
@@ -116,7 +116,7 @@ struct InteractivePlaygroundView: View {
         currentAnimationView = shapeView.view
     }
 
-    func getShape(for index: Int) -> DYBlinkObject.ShapeType {
+    func getShape(for index: Int) -> ShapeType {
         switch index {
         case 0: return .circle
         case 1: return .triangle
