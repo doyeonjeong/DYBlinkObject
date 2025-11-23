@@ -8,7 +8,7 @@
 import SwiftUI
 import DYBlinkObject
 
-@available(iOS 13.0, *)
+
 struct InteractivePlaygroundView: View {
     @State private var selectedShapeIndex = 0
     @State private var selectedAnimationIndex = 0
@@ -177,7 +177,7 @@ struct AnimationDisplayView: UIViewRepresentable {
     }
 }
 
-@available(iOS 13.0, *)
+
 struct InteractivePlaygroundView_Previews: PreviewProvider {
     static var previews: some View {
         InteractivePlaygroundView()

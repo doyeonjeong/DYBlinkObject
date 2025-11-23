@@ -8,7 +8,7 @@
 import SwiftUI
 import DYBlinkObject
 
-@available(iOS 13.0, *)
+
 struct ExampleDetailView: View {
     let example: ExampleItem
 
@@ -138,7 +138,7 @@ struct ExampleDetailView: View {
     }
 }
 
-@available(iOS 13.0, *)
+
 struct ExampleDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

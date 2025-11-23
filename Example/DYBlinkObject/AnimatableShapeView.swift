@@ -8,7 +8,7 @@
 import SwiftUI
 import DYBlinkObject
 
-@available(iOS 13.0, *)
+
 struct AnimatableShapeView: UIViewRepresentable {
     let shapeType: ShapeType
     let size: CGSize

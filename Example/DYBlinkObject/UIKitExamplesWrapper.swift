@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-@available(iOS 13.0, *)
+
 struct UIKitExamplesWrapper: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> ViewController {
         return ViewController()

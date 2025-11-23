@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-@available(iOS 13.0, *)
+
 struct SwiftUIExamplesView: View {
     var body: some View {
         NavigationView {
@@ -51,7 +51,7 @@ struct SwiftUIExamplesView: View {
     }
 }
 
-@available(iOS 13.0, *)
+
 struct SwiftUIExamplesView_Previews: PreviewProvider {
     static var previews: some View {
         SwiftUIExamplesView()
