@@ -11,27 +11,39 @@ import SwiftUI
 struct SwiftUIExamplesView: View {
     var body: some View {
         NavigationView {
-            List(ExampleItem.examples) { example in
-                NavigationLink(destination: ExampleDetailView(example: example)) {
-                    HStack(spacing: 16) {
-                        // Small preview
-                        AnimatableShapeView(
-                            shapeType: example.shapeType,
-                            size: CGSize(width: 50, height: 50),
-                            color: example.color,
-                            animations: example.animations
-                        )
-                        .frame(width: 50, height: 50)
+            List {
+                // Interactive Playground Section
+                Section {
+                    InteractivePlaygroundView()
+                        .listRowInsets(EdgeInsets())
+                        .listRowBackground(Color.clear)
+                }
 
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(example.title)
-                                .font(.headline)
-                            Text(example.subtitle)
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
+                // Examples Section
+                Section(header: Text("Example Gallery")) {
+                    ForEach(ExampleItem.examples) { example in
+                        NavigationLink(destination: ExampleDetailView(example: example)) {
+                            HStack(spacing: 16) {
+                                // Small preview
+                                AnimatableShapeView(
+                                    shapeType: example.shapeType,
+                                    size: CGSize(width: 50, height: 50),
+                                    color: example.color,
+                                    animations: example.animations
+                                )
+                                .frame(width: 50, height: 50)
+
+                                VStack(alignment: .leading, spacing: 4) {
+                                    Text(example.title)
+                                        .font(.headline)
+                                    Text(example.subtitle)
+                                        .font(.subheadline)
+                                        .foregroundColor(.secondary)
+                                }
+                            }
+                            .padding(.vertical, 8)
                         }
                     }
-                    .padding(.vertical, 8)
                 }
             }
             .navigationTitle("SwiftUI Examples")

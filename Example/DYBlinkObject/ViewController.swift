@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 import DYBlinkObject
 
 class ViewController: UIViewController {
@@ -18,6 +19,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.17, green: 0.24, blue: 0.31, alpha: 1.00)
         setupScrollView()
+        setupInteractivePlayground()
         setupV2Examples()
     }
 
@@ -42,13 +44,33 @@ class ViewController: UIViewController {
         ])
     }
 
+    @available(iOS 13.0, *)
+    private func setupInteractivePlayground() {
+        let playgroundView = InteractivePlaygroundView()
+        let hostingController = UIHostingController(rootView: playgroundView)
+
+        addChild(hostingController)
+        contentView.addSubview(hostingController.view)
+        hostingController.didMove(toParent: self)
+
+        hostingController.view.translatesAutoresizingMaskIntoConstraints = false
+        hostingController.view.backgroundColor = .clear
+
+        NSLayoutConstraint.activate([
+            hostingController.view.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            hostingController.view.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            hostingController.view.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            hostingController.view.heightAnchor.constraint(equalToConstant: 400)
+        ])
+    }
+
     private func setupV2Examples() {
         let blinkObject = DYBlinkObject()
-        var currentY: CGFloat = 60
-        let spacing: CGFloat = 100
+        var currentY: CGFloat = 440 // Start below the interactive playground
+        let spacing: CGFloat = 120
 
         // Title
-        let titleLabel = makeTextLabel(text: "DYBlinkObject v2.0", size: 28, weight: .bold)
+        let titleLabel = makeTextLabel(text: "Example Gallery", size: 24, weight: .bold)
         contentView.addSubview(titleLabel)
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: currentY),
