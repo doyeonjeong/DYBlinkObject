@@ -52,6 +52,11 @@ public class AnimatableView {
         }
     }
 
+    /// 모든 애니메이션 정지
+    public func stop() {
+        view.layer.removeAllAnimations()
+    }
+
     private func applyAnimation(_ animation: AnimationType) {
         switch animation {
         case .colorTransition(let from, let to, let duration):

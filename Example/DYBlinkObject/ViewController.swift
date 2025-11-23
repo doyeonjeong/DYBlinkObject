@@ -14,18 +14,64 @@ class ViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private var animatableViews: [AnimatableView] = []
+    private var isPlaying = false
+    private let playPauseButton = UIButton(type: .system)
+    private var buttonGradientLayer: CAGradientLayer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0.17, green: 0.24, blue: 0.31, alpha: 1.00)
+        view.backgroundColor = .white
+        setupPlayPauseButton()
         setupScrollView()
         setupV2Examples()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // Start all animations after views are added to the hierarchy
-        animatableViews.forEach { $0.start() }
+        // Don't auto-start animations - let user control with play/pause button
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        buttonGradientLayer?.frame = playPauseButton.bounds
+    }
+
+    private func setupPlayPauseButton() {
+        playPauseButton.translatesAutoresizingMaskIntoConstraints = false
+        playPauseButton.setTitle("▶ Play", for: .normal)
+        playPauseButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        playPauseButton.setTitleColor(.white, for: .normal)
+
+        // Gradient background
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [
+            UIColor.systemBlue.cgColor,
+            UIColor.systemBlue.withAlphaComponent(0.8).cgColor
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+        gradientLayer.cornerRadius = 12
+
+        playPauseButton.layer.insertSublayer(gradientLayer, at: 0)
+        playPauseButton.layer.cornerRadius = 12
+        buttonGradientLayer = gradientLayer
+
+        // Shadow
+        playPauseButton.layer.shadowColor = UIColor.systemBlue.withAlphaComponent(0.3).cgColor
+        playPauseButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        playPauseButton.layer.shadowOpacity = 1.0
+        playPauseButton.layer.shadowRadius = 8
+
+        playPauseButton.contentEdgeInsets = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+        playPauseButton.addTarget(self, action: #selector(togglePlayPause), for: .touchUpInside)
+
+        view.addSubview(playPauseButton)
+
+        NSLayoutConstraint.activate([
+            playPauseButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            playPauseButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            playPauseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+        ])
     }
 
     private func setupScrollView() {
@@ -39,7 +85,7 @@ class ViewController: UIViewController {
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: playPauseButton.topAnchor, constant: -16),
 
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
@@ -138,13 +184,6 @@ class ViewController: UIViewController {
         let label8 = makeTextLabel(text: "Custom Diamond + Color Transition", size: 16)
         addExample(view: example8.view, label: label8, yPosition: &currentY, spacing: spacing)
 
-        // Example 9: v1.0 Compatibility Test
-        let v1Example = blinkObject.draw(width: 200, height: 50, radius: 10, color: .white)
-        blinkObject.addBlinkingAnimation(to: v1Example, withDuration: 1.0, delay: 0.0, minAlpha: 0.3)
-
-        let label9 = makeTextLabel(text: "v1.0 Compatibility (Legacy API)", size: 16)
-        addExample(view: v1Example, label: label9, yPosition: &currentY, spacing: spacing)
-
         // Set content size
         contentView.heightAnchor.constraint(equalToConstant: currentY + 40).isActive = true
     }
@@ -170,8 +209,22 @@ class ViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: size, weight: weight)
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
+        label.textColor = .black
         label.textAlignment = .center
         return label
+    }
+
+    @objc private func togglePlayPause() {
+        isPlaying.toggle()
+
+        if isPlaying {
+            // Start animations
+            playPauseButton.setTitle("⏸ Pause", for: .normal)
+            animatableViews.forEach { $0.start() }
+        } else {
+            // Stop animations
+            playPauseButton.setTitle("▶ Play", for: .normal)
+            animatableViews.forEach { $0.stop() }
+        }
     }
 }
