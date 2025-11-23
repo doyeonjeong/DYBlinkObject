@@ -19,7 +19,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(red: 0.17, green: 0.24, blue: 0.31, alpha: 1.00)
+        view.backgroundColor = .white
         setupPlayPauseButton()
         setupScrollView()
         setupV2Examples()
@@ -162,13 +162,6 @@ class ViewController: UIViewController {
         let label8 = makeTextLabel(text: "Custom Diamond + Color Transition", size: 16)
         addExample(view: example8.view, label: label8, yPosition: &currentY, spacing: spacing)
 
-        // Example 9: v1.0 Compatibility Test
-        let v1Example = blinkObject.draw(width: 200, height: 50, radius: 10, color: .white)
-        blinkObject.addBlinkingAnimation(to: v1Example, withDuration: 1.0, delay: 0.0, minAlpha: 0.3)
-
-        let label9 = makeTextLabel(text: "v1.0 Compatibility (Legacy API)", size: 16)
-        addExample(view: v1Example, label: label9, yPosition: &currentY, spacing: spacing)
-
         // Set content size
         contentView.heightAnchor.constraint(equalToConstant: currentY + 40).isActive = true
     }
@@ -194,7 +187,7 @@ class ViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: size, weight: weight)
         label.sizeToFit()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .white
+        label.textColor = .black
         label.textAlignment = .center
         return label
     }

@@ -11,6 +11,7 @@ import DYBlinkObject
 
 struct InteractivePlaygroundView: View {
     @State private var currentAnimationView: UIView?
+    @State private var selectedTab = 0
 
     var body: some View {
         VStack(spacing: 0) {
@@ -30,17 +31,20 @@ struct InteractivePlaygroundView: View {
             .padding(.top, 20)
             .padding(.bottom, 16)
 
-            // Tab view for Preset and Custom
-            TabView {
-                PresetPlaygroundView(currentAnimationView: $currentAnimationView)
-                    .tabItem {
-                        Label("Preset", systemImage: "square.grid.2x2")
-                    }
+            // Segment Control for Preset and Custom
+            Picker("Mode", selection: $selectedTab) {
+                Text("Preset").tag(0)
+                Text("Custom").tag(1)
+            }
+            .pickerStyle(SegmentedPickerStyle())
+            .padding(.horizontal, 20)
+            .padding(.bottom, 16)
 
+            // Content based on selected tab
+            if selectedTab == 0 {
+                PresetPlaygroundView(currentAnimationView: $currentAnimationView)
+            } else {
                 CustomPlaygroundView(currentAnimationView: $currentAnimationView)
-                    .tabItem {
-                        Label("Custom", systemImage: "slider.horizontal.3")
-                    }
             }
         }
     }
