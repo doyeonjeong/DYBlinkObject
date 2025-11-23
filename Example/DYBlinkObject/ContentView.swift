@@ -11,16 +11,21 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            SwiftUIExamplesView()
-                .tabItem {
-                    Image(systemName: "swift")
-                    Text("SwiftUI")
-                }
+            // Playground Tab (Default)
+            NavigationView {
+                InteractivePlaygroundView()
+                    .navigationTitle("Playground")
+            }
+            .tabItem {
+                Image(systemName: "play.circle.fill")
+                Text("Playground")
+            }
 
+            // Samples Tab
             UIKitExamplesWrapper()
                 .tabItem {
-                    Image(systemName: "rectangle.grid.3x2")
-                    Text("UIKit")
+                    Image(systemName: "square.grid.3x3.fill")
+                    Text("Samples")
                 }
         }
     }

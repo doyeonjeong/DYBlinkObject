@@ -18,63 +18,74 @@ struct InteractivePlaygroundView: View {
     let animationTypes = ["Alpha", "Scale", "Rotation", "Glow", "Color"]
 
     var body: some View {
-        VStack(spacing: 16) {
-            Text("🎮 Interactive Playground")
-                .font(.title3)
-                .fontWeight(.bold)
-                .padding(.top, 16)
+        ScrollView {
+            VStack(spacing: 24) {
+                // Animation display area
+                VStack(spacing: 12) {
+                    Text("Preview")
+                        .font(.headline)
+                        .foregroundColor(.secondary)
 
-            // Animation display area
-            AnimationDisplayView(animationView: $currentAnimationView)
-                .frame(height: 100)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(12)
-                .padding(.horizontal, 16)
-
-            // Shape selector
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Shape Type")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
-
-                Picker("Shape", selection: $selectedShapeIndex) {
-                    ForEach(0..<shapeTypes.count, id: \.self) { index in
-                        Text(shapeTypes[index]).tag(index)
-                    }
+                    AnimationDisplayView(animationView: $currentAnimationView)
+                        .frame(height: 200)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.gray.opacity(0.1))
+                        .cornerRadius(16)
                 }
-                .pickerStyle(SegmentedPickerStyle())
-            }
-            .padding(.horizontal, 16)
+                .padding(.horizontal, 20)
+                .padding(.top, 20)
 
-            // Animation selector
-            VStack(alignment: .leading, spacing: 6) {
-                Text("Animation Type")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                // Shape selector
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Shape Type")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
 
-                Picker("Animation", selection: $selectedAnimationIndex) {
-                    ForEach(0..<animationTypes.count, id: \.self) { index in
-                        Text(animationTypes[index]).tag(index)
+                    Picker("Shape", selection: $selectedShapeIndex) {
+                        ForEach(0..<shapeTypes.count, id: \.self) { index in
+                            Text(shapeTypes[index]).tag(index)
+                        }
                     }
+                    .pickerStyle(SegmentedPickerStyle())
                 }
-                .pickerStyle(SegmentedPickerStyle())
-            }
-            .padding(.horizontal, 16)
+                .padding(.horizontal, 20)
 
-            // Create button
-            Button(action: createAnimation) {
-                Label("Create Animation", systemImage: "play.fill")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding(.vertical, 12)
-                    .background(Color.blue)
-                    .cornerRadius(10)
+                // Animation selector
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("Animation Type")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+
+                    Picker("Animation", selection: $selectedAnimationIndex) {
+                        ForEach(0..<animationTypes.count, id: \.self) { index in
+                            Text(animationTypes[index]).tag(index)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                }
+                .padding(.horizontal, 20)
+
+                // Create button
+                Button(action: createAnimation) {
+                    Label("Create Animation", systemImage: "play.circle.fill")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 16)
+                        .background(
+                            LinearGradient(
+                                gradient: Gradient(colors: [Color.blue, Color.blue.opacity(0.8)]),
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                        .cornerRadius(12)
+                        .shadow(color: Color.blue.opacity(0.3), radius: 8, x: 0, y: 4)
+                }
+                .padding(.horizontal, 20)
+                .padding(.bottom, 30)
             }
-            .padding(.horizontal, 16)
-            .padding(.bottom, 16)
         }
-        .background(Color(UIColor.systemBackground))
     }
 
     func createAnimation() {
