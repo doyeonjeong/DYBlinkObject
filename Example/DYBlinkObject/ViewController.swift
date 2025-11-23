@@ -58,7 +58,7 @@ class ViewController: UIViewController {
 
         // Example 1: Circle with Alpha Animation
         let example1 = blinkObject.createShape(.circle, size: CGSize(width: 80, height: 80), color: .systemBlue)
-        example1.addAnimation(.alpha(from: 1.0, to: 0.3, duration: 1.0))
+        example1.addAnimation(AnimationType.alpha(from: 1.0, to: 0.3, duration: 1.0))
         example1.start()
 
         let label1 = makeTextLabel(text: "Circle + Alpha Animation", size: 16)
@@ -66,7 +66,7 @@ class ViewController: UIViewController {
 
         // Example 2: Triangle with Scale Animation
         let example2 = blinkObject.createShape(.triangle, size: CGSize(width: 80, height: 80), color: .systemGreen)
-        example2.addAnimation(.scale(from: 1.0, to: 1.3, duration: 1.5))
+        example2.addAnimation(AnimationType.scale(from: 1.0, to: 1.3, duration: 1.5))
         example2.start()
 
         let label2 = makeTextLabel(text: "Triangle + Scale Animation", size: 16)
@@ -74,7 +74,7 @@ class ViewController: UIViewController {
 
         // Example 3: Star with Rotation
         let example3 = blinkObject.createShape(.star(points: 5), size: CGSize(width: 80, height: 80), color: .systemYellow)
-        example3.addAnimation(.rotation(angle: .pi * 2, duration: 3.0))
+        example3.addAnimation(AnimationType.rotation(angle: .pi * 2, duration: 3.0))
         example3.start()
 
         let label3 = makeTextLabel(text: "Star + Rotation Animation", size: 16)
@@ -82,7 +82,7 @@ class ViewController: UIViewController {
 
         // Example 4: Heart with Glow
         let example4 = blinkObject.createShape(.heart, size: CGSize(width: 80, height: 80), color: .systemPink)
-        example4.addAnimation(.glow(color: .systemPink, radius: 20, duration: 1.5))
+        example4.addAnimation(AnimationType.glow(color: .systemPink, radius: 20, duration: 1.5))
         example4.start()
 
         let label4 = makeTextLabel(text: "Heart + Glow Animation", size: 16)
@@ -90,7 +90,7 @@ class ViewController: UIViewController {
 
         // Example 5: Pentagon with Color Transition
         let example5 = blinkObject.createShape(.polygon(sides: 5), size: CGSize(width: 80, height: 80), color: .systemPurple)
-        example5.addAnimation(.colorTransition(from: .systemPurple, to: .systemOrange, duration: 2.0))
+        example5.addAnimation(AnimationType.colorTransition(from: .systemPurple, to: .systemOrange, duration: 2.0))
         example5.start()
 
         let label5 = makeTextLabel(text: "Pentagon + Color Transition", size: 16)
@@ -99,8 +99,8 @@ class ViewController: UIViewController {
         // Example 6: Rounded Hexagon with Multiple Animations
         let example6 = blinkObject.createShape(.roundedPolygon(sides: 6, cornerRadius: 8), size: CGSize(width: 80, height: 80), color: .systemTeal)
         example6
-            .addAnimation(.scale(from: 1.0, to: 1.2, duration: 1.0))
-            .addAnimation(.alpha(from: 1.0, to: 0.5, duration: 1.0))
+            .addAnimation(AnimationType.scale(from: 1.0, to: 1.2, duration: 1.0))
+            .addAnimation(AnimationType.alpha(from: 1.0, to: 0.5, duration: 1.0))
         example6.start()
 
         let label6 = makeTextLabel(text: "Hexagon + Scale + Alpha", size: 16)
@@ -109,8 +109,8 @@ class ViewController: UIViewController {
         // Example 7: Rectangle with Rotation + Glow
         let example7 = blinkObject.createShape(.rectangle, size: CGSize(width: 80, height: 80), color: .systemRed)
         example7
-            .addAnimation(.rotation(angle: .pi * 2, duration: 4.0))
-            .addAnimation(.glow(color: .systemRed, radius: 15, duration: 1.5))
+            .addAnimation(AnimationType.rotation(angle: .pi * 2, duration: 4.0))
+            .addAnimation(AnimationType.glow(color: .systemRed, radius: 15, duration: 1.5))
         example7.start()
 
         let label7 = makeTextLabel(text: "Rectangle + Rotation + Glow", size: 16)
@@ -125,7 +125,7 @@ class ViewController: UIViewController {
         diamondPath.close()
 
         let example8 = blinkObject.createShape(.customPath(path: diamondPath), size: CGSize(width: 80, height: 80), color: .systemIndigo)
-        example8.addAnimation(.colorTransition(from: .systemIndigo, to: .systemCyan, duration: 2.0))
+        example8.addAnimation(AnimationType.colorTransition(from: .systemIndigo, to: .systemCyan, duration: 2.0))
         example8.start()
 
         let label8 = makeTextLabel(text: "Custom Diamond + Color Transition", size: 16)
