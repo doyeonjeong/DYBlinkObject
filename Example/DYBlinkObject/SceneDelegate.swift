@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 @available(iOS 13.0, *)
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -16,8 +17,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
 
         let window = UIWindow(windowScene: windowScene)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        window.rootViewController = storyboard.instantiateInitialViewController()
+
+        // Load SwiftUI ContentView with TabView
+        let contentView = ContentView()
+        window.rootViewController = UIHostingController(rootView: contentView)
+
         self.window = window
         window.makeKeyAndVisible()
     }
