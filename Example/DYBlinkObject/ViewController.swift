@@ -34,16 +34,20 @@ class ViewController: UIViewController {
         playPauseButton.translatesAutoresizingMaskIntoConstraints = false
         playPauseButton.setTitle("▶ Play", for: .normal)
         playPauseButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        playPauseButton.tintColor = .white
-        playPauseButton.backgroundColor = UIColor(white: 1.0, alpha: 0.2)
+        playPauseButton.setTitleColor(.systemBlue, for: .normal)
+        playPauseButton.backgroundColor = .white
         playPauseButton.layer.cornerRadius = 12
-        playPauseButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 24, bottom: 12, right: 24)
+        playPauseButton.layer.shadowColor = UIColor.black.cgColor
+        playPauseButton.layer.shadowOffset = CGSize(width: 0, height: -2)
+        playPauseButton.layer.shadowOpacity = 0.1
+        playPauseButton.layer.shadowRadius = 8
+        playPauseButton.contentEdgeInsets = UIEdgeInsets(top: 16, left: 32, bottom: 16, right: 32)
         playPauseButton.addTarget(self, action: #selector(togglePlayPause), for: .touchUpInside)
 
         view.addSubview(playPauseButton)
 
         NSLayoutConstraint.activate([
-            playPauseButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            playPauseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
             playPauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
@@ -56,10 +60,10 @@ class ViewController: UIViewController {
         scrollView.addSubview(contentView)
 
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: playPauseButton.bottomAnchor, constant: 16),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: playPauseButton.topAnchor, constant: -16),
 
             contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
