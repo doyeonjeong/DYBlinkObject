@@ -14,18 +14,38 @@ class ViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private var animatableViews: [AnimatableView] = []
+    private var isPlaying = false
+    private let playPauseButton = UIButton(type: .system)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.17, green: 0.24, blue: 0.31, alpha: 1.00)
+        setupPlayPauseButton()
         setupScrollView()
         setupV2Examples()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // Start all animations after views are added to the hierarchy
-        animatableViews.forEach { $0.start() }
+        // Don't auto-start animations - let user control with play/pause button
+    }
+
+    private func setupPlayPauseButton() {
+        playPauseButton.translatesAutoresizingMaskIntoConstraints = false
+        playPauseButton.setTitle("▶ Play", for: .normal)
+        playPauseButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        playPauseButton.tintColor = .white
+        playPauseButton.backgroundColor = UIColor(white: 1.0, alpha: 0.2)
+        playPauseButton.layer.cornerRadius = 12
+        playPauseButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 24, bottom: 12, right: 24)
+        playPauseButton.addTarget(self, action: #selector(togglePlayPause), for: .touchUpInside)
+
+        view.addSubview(playPauseButton)
+
+        NSLayoutConstraint.activate([
+            playPauseButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            playPauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
 
     private func setupScrollView() {
@@ -36,7 +56,7 @@ class ViewController: UIViewController {
         scrollView.addSubview(contentView)
 
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: playPauseButton.bottomAnchor, constant: 16),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -173,5 +193,19 @@ class ViewController: UIViewController {
         label.textColor = .white
         label.textAlignment = .center
         return label
+    }
+
+    @objc private func togglePlayPause() {
+        isPlaying.toggle()
+
+        if isPlaying {
+            // Start animations
+            playPauseButton.setTitle("⏸ Pause", for: .normal)
+            animatableViews.forEach { $0.start() }
+        } else {
+            // Stop animations
+            playPauseButton.setTitle("▶ Play", for: .normal)
+            animatableViews.forEach { $0.stop() }
+        }
     }
 }
