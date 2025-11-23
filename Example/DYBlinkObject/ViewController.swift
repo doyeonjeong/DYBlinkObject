@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     private var animatableViews: [AnimatableView] = []
     private var isPlaying = false
     private let playPauseButton = UIButton(type: .system)
+    private var buttonGradientLayer: CAGradientLayer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,25 +31,46 @@ class ViewController: UIViewController {
         // Don't auto-start animations - let user control with play/pause button
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        buttonGradientLayer?.frame = playPauseButton.bounds
+    }
+
     private func setupPlayPauseButton() {
         playPauseButton.translatesAutoresizingMaskIntoConstraints = false
         playPauseButton.setTitle("▶ Play", for: .normal)
-        playPauseButton.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        playPauseButton.setTitleColor(.systemBlue, for: .normal)
-        playPauseButton.backgroundColor = .white
+        playPauseButton.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        playPauseButton.setTitleColor(.white, for: .normal)
+
+        // Gradient background
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [
+            UIColor.systemBlue.cgColor,
+            UIColor.systemBlue.withAlphaComponent(0.8).cgColor
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0.5)
+        gradientLayer.cornerRadius = 12
+
+        playPauseButton.layer.insertSublayer(gradientLayer, at: 0)
         playPauseButton.layer.cornerRadius = 12
-        playPauseButton.layer.shadowColor = UIColor.black.cgColor
-        playPauseButton.layer.shadowOffset = CGSize(width: 0, height: -2)
-        playPauseButton.layer.shadowOpacity = 0.1
+        buttonGradientLayer = gradientLayer
+
+        // Shadow
+        playPauseButton.layer.shadowColor = UIColor.systemBlue.withAlphaComponent(0.3).cgColor
+        playPauseButton.layer.shadowOffset = CGSize(width: 0, height: 4)
+        playPauseButton.layer.shadowOpacity = 1.0
         playPauseButton.layer.shadowRadius = 8
-        playPauseButton.contentEdgeInsets = UIEdgeInsets(top: 16, left: 32, bottom: 16, right: 32)
+
+        playPauseButton.contentEdgeInsets = UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
         playPauseButton.addTarget(self, action: #selector(togglePlayPause), for: .touchUpInside)
 
         view.addSubview(playPauseButton)
 
         NSLayoutConstraint.activate([
-            playPauseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            playPauseButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            playPauseButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            playPauseButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            playPauseButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
 
