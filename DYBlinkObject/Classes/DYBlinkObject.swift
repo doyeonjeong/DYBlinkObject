@@ -89,9 +89,12 @@ public class AnimatableView {
     }
 
     private func applyRotation(angle: CGFloat, duration: TimeInterval) {
-        UIView.animate(withDuration: duration, delay: 0, options: [.repeat, .curveLinear]) {
-            self.view.transform = self.view.transform.rotated(by: angle)
-        }
+        let rotation = CABasicAnimation(keyPath: "transform.rotation.z")
+        rotation.fromValue = 0
+        rotation.toValue = angle
+        rotation.duration = duration
+        rotation.repeatCount = .infinity
+        view.layer.add(rotation, forKey: "rotation")
     }
 
     private func applyGlow(color: UIColor, radius: CGFloat, duration: TimeInterval) {
