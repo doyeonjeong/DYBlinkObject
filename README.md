@@ -24,15 +24,11 @@
        style="width: 100%; height: auto; border-radius: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.15);">
 </div>
 
-[🇰🇷 한국어](#korean)
-
 ---
 
-<a name="korean"></a>
-# 🇰🇷 한국어
-
 ## 소개
-DYBlinkObject는 다양한 효과를 가진 애니메이션 도형을 만들 수 있는 강력한 Swift 라이브러리입니다. 버전 2.0에서는 여러 도형 타입과 애니메이션 효과를 체이닝 가능한 API로 지원합니다.
+DYBlinkObject는 다양한 효과를 가진 애니메이션 도형을 만들 수 있는 Swift 라이브러리입니다.
+버전 2.0에서는 여러 도형 타입과 애니메이션 효과를 체이닝 가능한 API로 지원합니다.
 
 ## 🎮 Interactive Playground
 Example 앱에는 실시간으로 shape와 animation을 조합해볼 수 있는 **Interactive Playground**가 포함되어 있습니다!
